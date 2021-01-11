@@ -12,14 +12,14 @@ final stopwatchProvider =
 class StopwatchController extends ChangeNotifier {
   StopwatchController() {
     countStreamController = StreamController<int>();
-    count = 0;
+    _count = 0;
     time10msec = '00';
     timeMin = '00';
     timeSec = '00';
     isWorking = false;
   }
   StreamController<int> countStreamController;
-  int count;
+  int _count;
   String time10msec;
   String timeMin;
   String timeSec;
@@ -34,11 +34,11 @@ class StopwatchController extends ChangeNotifier {
   }
 
   void _tick(Timer timer) {
-    count++;
-    countStreamController.add(count);
-    time10msec = (count % 100).toString().padLeft(2, '0');
-    timeSec = ((count ~/ 100) % 60).toString().padLeft(2, '0');
-    timeMin = ((count ~/ 100) ~/ 60).toString().padLeft(2, '0');
+    _count++;
+    countStreamController.add(_count);
+    time10msec = (_count % 100).toString().padLeft(2, '0');
+    timeSec = ((_count ~/ 100) % 60).toString().padLeft(2, '0');
+    timeMin = ((_count ~/ 100) ~/ 60).toString().padLeft(2, '0');
   }
 
   void pause() {
@@ -50,7 +50,7 @@ class StopwatchController extends ChangeNotifier {
 
   void reset() {
     isWorking = false;
-    count = 0;
+    _count = 0;
     time10msec = '00';
     timeMin = '00';
     timeSec = '00';
