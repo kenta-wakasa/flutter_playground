@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/ui/stopwatch/stopwatch_page.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../data/sample_data.dart';
@@ -16,6 +17,11 @@ class SampleListController extends ChangeNotifier {
         title: 'カウンター',
         description: 'RiverPod をつかったカウンターアプリです。',
         page: const CounterPage(title: 'カウンター'),
+      ),
+      SampleData(
+        title: 'ストップウォッチ',
+        description: 'StreamBuilderでストップウォッチを作っていみたい。',
+        page: const StopwatchPage(title: 'ストップウォッチ'),
       ),
     ];
   }
