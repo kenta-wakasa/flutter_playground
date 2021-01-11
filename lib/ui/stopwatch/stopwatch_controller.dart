@@ -26,6 +26,13 @@ class StopwatchController extends ChangeNotifier {
   Timer timer;
   bool isWorking;
 
+  @override
+  void dispose() {
+    super.dispose();
+    countStreamController.close();
+    timer?.cancel();
+  }
+
   void start() {
     isWorking = true;
     countStreamController = StreamController<int>();
