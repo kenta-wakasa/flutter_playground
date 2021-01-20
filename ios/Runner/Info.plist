@@ -28,6 +28,17 @@
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<!-- //////////////////////////////////////////// -->
+	<!-- file picker を使う  -->
+	<key>UIBackgroundModes</key><!-- バックグラウンドでのダウンロードとか  -->
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>NSAppleMusicUsageDescription</key><!-- 音楽データ  -->
+	<string>Explain why your app uses music</string>
+	<key>NSPhotoLibraryUsageDescription</key><!-- 写真データ  -->
+	<string>Explain why your app uses photo library</string>
+	<!-- //////////////////////////////////////////// -->
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/sample_data.dart';
 import '../counter/counter_page.dart';
+import '../file_picker/file_picker_page.dart';
 import '../io/io_page.dart';
 import '../stopwatch/stopwatch_page.dart';
 
@@ -29,6 +30,11 @@ class SampleListController extends ChangeNotifier {
         title: IoPage.title,
         description: '外部データの読み込みと書き出しをやりたい。',
         page: const IoPage(),
+      ),
+      SampleData(
+        title: FilePickerPage.title,
+        description: 'ファイルピッカーを使ってみたい',
+        page: const FilePickerPage(),
       ),
     ];
   }
