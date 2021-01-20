@@ -12,24 +12,28 @@ class IoController extends ChangeNotifier {
   IoController() {
     /// 初期化処理をここに書く
     () async {
-      path = await localPath;
-      appDirectory = Directory('$path/playground/');
-      if (appDirectory.existsSync()) {
+      final _localPath = await localPath;
+      appPath = '$_localPath/playground/';
+      appDirectory = Directory(appPath);
+      appPath = appDirectory.path;
+      // ignore: avoid_slow_async_io
+      if (await appDirectory.exists()) {
         print('${appDirectory.path} already exist');
+        await read();
       } else {
         await appDirectory.create(recursive: true);
+        content = 'ファイルに書き込まれた時間を表示します';
       }
-      path = appDirectory.path;
     }();
   }
 
-  /// このプロバイダーが廃棄されるよきに呼ばれる
   @override
   void dispose() {
     super.dispose();
   }
 
-  String path;
+  String appPath;
+  String content;
   Directory appDirectory;
 
   /// ローカルパスの取得
@@ -40,15 +44,16 @@ class IoController extends ChangeNotifier {
   }
 
   /// 現在時刻の書き込み
-  void write() {
-    final file = File('$path/test.txt');
+  Future<void> write() async {
+    final file = File('$appPath/test.txt');
     print('write: ${file.path}');
-    file.writeAsStringSync(DateTime.now().toString());
-    notifyListeners();
+    await file.writeAsString(DateTime.now().toString());
   }
 
-  String get read {
-    final file = File('$path/test.txt');
-    return file.readAsStringSync();
+  /// 現在時刻の読み込み
+  Future<void> read() async {
+    final file = File('$appPath/test.txt');
+    content = await file.readAsString();
+    notifyListeners();
   }
 }

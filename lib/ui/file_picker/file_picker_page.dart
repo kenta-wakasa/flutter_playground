@@ -58,11 +58,7 @@ class FilePickerPage extends ConsumerWidget {
             SizedBox(
               width: 300,
               height: 200,
-              // child: ListView(
-              //   children: [
-              //     Center(child: Text(_provider.fileContents)),
-              //   ],
-              // ),
+              //スクロールに対応
               child: SingleChildScrollView(
                 child: Center(child: Text(_provider.fileContents)),
               ),
@@ -72,7 +68,7 @@ class FilePickerPage extends ConsumerWidget {
               child: ElevatedButton(
                 onPressed: _provider.pickSuccess
                     ? () async {
-                        _provider.readFileContents();
+                        await _provider.readFileContents();
                       }
                     : null, // 使えない時は null をいれると色が変わってくれる
                 child: const Text('選択したファイルを読み込む'),

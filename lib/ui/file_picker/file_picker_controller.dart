@@ -51,9 +51,9 @@ class FilePickerController extends ChangeNotifier {
   }
 
   /// ファイルを読み込む
-  void readFileContents() {
+  Future<void> readFileContents() async {
     if (file != null) {
-      fileContents = file.readAsStringSync();
+      fileContents = await file.readAsString();
       notifyListeners();
     }
   }

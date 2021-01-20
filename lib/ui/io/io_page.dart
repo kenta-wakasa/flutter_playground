@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'io_controller.dart';
 
-
-
 class IoPage extends ConsumerWidget {
   const IoPage({Key key}) : super(key: key);
 
@@ -24,22 +22,23 @@ class IoPage extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Text('アプリのローカルパス: \n${_ioProvider?.path}'),
+            Text('アプリのローカルパス: \n${_ioProvider?.appPath}'),
             Padding(
               padding: const EdgeInsets.all(16),
               child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  height: 25,
                   child: FittedBox(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.fitHeight,
                     child: Text(
-                      _ioProvider.read,
+                      _ioProvider.content,
                     ),
                   )),
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  _ioProvider.write();
+                onPressed: () async {
+                  await _ioProvider.write();
+                  await _ioProvider.read();
                 },
                 child: const Text('いまの時間を書き込む'),
               ),
