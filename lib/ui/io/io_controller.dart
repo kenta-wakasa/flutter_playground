@@ -16,10 +16,10 @@ class IoController extends ChangeNotifier {
       final _localPath = await localPath;
       appPath = '$_localPath/playground/';
       appDirectory = Directory(appPath);
+      content = 'ファイルに書き込まれた時間を表示します';
+
       /// 新しくディレクトリをつくる
       await appDirectory.create(recursive: true);
-      content = 'ファイルに書き込まれた時間を表示します';
-      }
     }();
   }
 
