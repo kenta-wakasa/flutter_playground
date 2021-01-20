@@ -11,18 +11,14 @@ final ioProvider = ChangeNotifierProvider.autoDispose<IoController>(
 class IoController extends ChangeNotifier {
   IoController() {
     /// 初期化処理をここに書く
+    /// コンストラクタで非同期処理をやりたい場合どうすのがいいんでしょう？
     () async {
       final _localPath = await localPath;
       appPath = '$_localPath/playground/';
       appDirectory = Directory(appPath);
-      appPath = appDirectory.path;
-      // ignore: avoid_slow_async_io
-      if (await appDirectory.exists()) {
-        print('${appDirectory.path} already exist');
-        await read();
-      } else {
-        await appDirectory.create(recursive: true);
-        content = 'ファイルに書き込まれた時間を表示します';
+      /// 新しくディレクトリをつくる
+      await appDirectory.create(recursive: true);
+      content = 'ファイルに書き込まれた時間を表示します';
       }
     }();
   }
