@@ -6,16 +6,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'stopwatch_controller.dart';
 
 class StopwatchPage extends ConsumerWidget {
-  const StopwatchPage({Key key, this.title}) : super(key: key);
-  final String title;
+  const StopwatchPage({Key key}) : super(key: key);
+  static const String title = 'ストップウォッチ';
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final _provider = watch(stopwatchProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -41,14 +41,14 @@ class StopwatchPage extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 child: const Text('reset'),
                 onPressed: () {
                   _provider.reset();
                 },
               ),
               const SizedBox(width: 16),
-              RaisedButton(
+              ElevatedButton(
                 child: _provider.isWorking
                     ? const Text('pause')
                     : const Text('start'),

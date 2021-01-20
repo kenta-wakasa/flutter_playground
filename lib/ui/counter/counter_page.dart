@@ -4,16 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'counter_controller.dart';
 
 class CounterPage extends ConsumerWidget {
-  const CounterPage({Key key, this.title = 'サンプル'}) : super(key: key);
-  final String title;
+  const CounterPage({Key key}) : super(key: key);
+  static const String title = 'カウンター';
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final _provider = watch(counterProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       floatingActionButton: FloatingActionButton(
