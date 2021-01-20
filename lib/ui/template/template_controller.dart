@@ -15,6 +15,4 @@ class TemplateController extends ChangeNotifier {
   void dispose() {
     super.dispose();
   }
-
-  static const String title = 'テンプレート';
 }
