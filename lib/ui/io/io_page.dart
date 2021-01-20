@@ -26,13 +26,14 @@ class IoPage extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: SizedBox(
-                  height: 25,
-                  child: FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Text(
-                      _ioProvider.content,
-                    ),
-                  )),
+                height: 25,
+                child: FittedBox(
+                  fit: BoxFit.fitHeight,
+                  child: Text(
+                    _ioProvider.content,
+                  ),
+                ),
+              ),
             ),
             Center(
               child: ElevatedButton(
