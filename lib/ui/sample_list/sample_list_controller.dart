@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/sample_data.dart';
+import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
 import '../io/io_page.dart';
@@ -35,6 +36,11 @@ class SampleListController extends ChangeNotifier {
         title: FilePickerPage.title,
         description: 'ファイルピッカーを使ってみたい',
         page: const FilePickerPage(),
+      ),
+      SampleData(
+        title: ClearButtonPage.title,
+        description: '閉じるボタンのあるダイアログ',
+        page: const ClearButtonPage(),
       ),
     ];
   }
