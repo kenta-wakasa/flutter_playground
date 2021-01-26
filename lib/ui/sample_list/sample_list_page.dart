@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/sample_data.dart';
+import '../../entity/sample_data.dart';
 import 'sample_list_controller.dart';
 
 class SampleListPage extends ConsumerWidget {

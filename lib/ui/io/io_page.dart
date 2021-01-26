@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/app.dart';
 import 'io_controller.dart';
 
 class IoPage extends ConsumerWidget {
@@ -22,7 +24,7 @@ class IoPage extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Text('アプリのローカルパス: \n${_ioProvider?.appPath}'),
+            Text('アプリのローカルパス: \n${App.directory.path}'),
             Padding(
               padding: const EdgeInsets.all(16),
               child: SizedBox(

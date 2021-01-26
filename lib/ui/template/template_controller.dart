@@ -7,10 +7,7 @@ final templateProvider = ChangeNotifierProvider.autoDispose<TemplateController>(
 
 class TemplateController extends ChangeNotifier {
   TemplateController() {
-    /// 初期化処理をここに書く
   }
-
-  /// このプロバイダーが廃棄されるよきに呼ばれる
   @override
   void dispose() {
     super.dispose();

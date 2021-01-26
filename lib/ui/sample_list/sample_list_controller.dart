@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/sample_data.dart';
+import '../../entity/sample_data.dart';
 import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
+import '../freezed/freezed_page.dart';
 import '../io/io_page.dart';
 import '../stopwatch/stopwatch_page.dart';
 
@@ -17,30 +18,35 @@ final sampleListProvider =
 class SampleListController extends ChangeNotifier {
   SampleListController() {
     sampleDataList = [
-      SampleData(
+      const SampleData(
         title: CounterPage.title,
         description: 'RiverPod をつかったカウンターアプリです。',
-        page: const CounterPage(),
+        page: CounterPage(),
       ),
-      SampleData(
+      const SampleData(
         title: StopwatchPage.title,
         description: 'StreamBuilderでストップウォッチを作っていみたい。',
-        page: const StopwatchPage(),
+        page: StopwatchPage(),
       ),
-      SampleData(
+      const SampleData(
         title: IoPage.title,
         description: '外部データの読み込みと書き出しをやりたい。',
-        page: const IoPage(),
+        page: IoPage(),
       ),
-      SampleData(
+      const SampleData(
         title: FilePickerPage.title,
         description: 'ファイルピッカーを使ってみたい',
-        page: const FilePickerPage(),
+        page: FilePickerPage(),
       ),
-      SampleData(
+      const SampleData(
         title: ClearButtonPage.title,
         description: '閉じるボタンのあるダイアログ',
-        page: const ClearButtonPage(),
+        page: ClearButtonPage(),
+      ),
+      const SampleData(
+        title: FreezedPage.title,
+        description: 'Freezedを使ってみたい。',
+        page: FreezedPage(),
       ),
     ];
   }

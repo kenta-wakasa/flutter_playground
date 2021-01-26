@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+@immutable
 class SampleData {
-  SampleData({
+  const SampleData({
     @required this.title,
     @required this.description,
     @required this.page,
   });
-  String title = '';
-  String description = '';
-  ConsumerWidget page;
+  final String title;
+  final String description;
+  final ConsumerWidget page;
 }

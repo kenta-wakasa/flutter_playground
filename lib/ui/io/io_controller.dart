@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+
+import '../../utils/app.dart';
 
 final ioProvider = ChangeNotifierProvider.autoDispose<IoController>(
   (ref) => IoController(),
@@ -10,16 +12,8 @@ final ioProvider = ChangeNotifierProvider.autoDispose<IoController>(
 
 class IoController extends ChangeNotifier {
   IoController() {
-    /// 初期化処理をここに書く
-    /// コンストラクタで非同期処理をやりたい場合どうすのがいいんでしょう？
     () async {
-      final _localPath = await localPath;
-      appPath = '$_localPath/playground/';
-      appDirectory = Directory(appPath);
-      content = 'ファイルに書き込まれた時間を表示します';
-
-      /// 新しくディレクトリをつくる
-      await appDirectory.create(recursive: true);
+      await read();
     }();
   }
 
@@ -28,28 +22,29 @@ class IoController extends ChangeNotifier {
     super.dispose();
   }
 
-  String appPath;
-  String content;
-  Directory appDirectory;
+  String _content = 'ファイルに書き込まれた時間を表示します';
 
-  /// ローカルパスの取得
-  Future<String> get localPath async {
-    final directory = await getApplicationDocumentsDirectory();
-    notifyListeners();
-    return directory.path;
-  }
+  String get content => _content;
 
   /// 現在時刻の書き込み
   Future<void> write() async {
-    final file = File('$appPath/test.txt');
-    print('write: ${file.path}');
+    final file = File(path.join(App.directory.path, 'time.txt'));
     await file.writeAsString(DateTime.now().toString());
   }
 
   /// 現在時刻の読み込み
-  Future<void> read() async {
-    final file = File('$appPath/test.txt');
-    content = await file.readAsString();
+  Future<bool> read() async {
+    bool result;
+    final file = File(path.join(App.directory.path, 'time.txt'));
+    try {
+      _content = await file.readAsString();
+      result = true;
+    } on FileSystemException catch (e) {
+      print(e);
+      print(_content);
+      result = false;
+    }
     notifyListeners();
+    return result;
   }
 }
