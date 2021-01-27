@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/ui/movable_box/movable_box_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,7 @@ import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
 import '../freezed/freezed_page.dart';
 import '../io/io_page.dart';
+import '../movable_box/movable_box_page.dart';
 import '../stopwatch/stopwatch_page.dart';
 
 final sampleListProvider =
@@ -47,6 +49,11 @@ class SampleListController extends ChangeNotifier {
         title: FreezedPage.title,
         description: 'Freezedを使ってみたい。',
         page: FreezedPage(),
+      ),
+      const SampleData(
+        title: MovableBoxPage.title,
+        description: 'ドラッグでオブジェクトを動かしたい。',
+        page: MovableBoxPage(),
       ),
     ];
   }
