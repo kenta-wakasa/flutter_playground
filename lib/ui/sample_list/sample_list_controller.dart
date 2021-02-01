@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_playground/ui/movable_box/movable_box_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +7,7 @@ import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
 import '../freezed/freezed_page.dart';
+import '../http_test/http_test_page.dart';
 import '../io/io_page.dart';
 import '../movable_box/movable_box_page.dart';
 import '../stopwatch/stopwatch_page.dart';
@@ -54,6 +54,11 @@ class SampleListController extends ChangeNotifier {
         title: MovableBoxPage.title,
         description: 'ドラッグでオブジェクトを動かしたい。',
         page: MovableBoxPage(),
+      ),
+      const SampleData(
+        title: HttpTestPage.title,
+        description: 'サーバーと通信してみたい',
+        page: HttpTestPage(),
       ),
     ];
   }

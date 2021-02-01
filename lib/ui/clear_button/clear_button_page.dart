@@ -34,7 +34,7 @@ class ClearButtonPage extends ConsumerWidget {
               children: [
                 const Text(
                   'ダイアログを開く',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
