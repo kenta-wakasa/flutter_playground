@@ -4,23 +4,45 @@ import 'package:flutter/material.dart';
 
 class CanvasController extends ChangeNotifier {
   CanvasController() {
-    width = 300;
-    heihgt = 400;
-    offsetList = const [
-      Offset(100, 100),
-      Offset(200, 100),
-      Offset(200, 200),
-      Offset(300, 200)
+    _radians = 0;
+    _tx = 0;
+    _ty = 0;
+    _sourceOffsetList = const [
+      Offset(0, 0),
+      Offset(100, 0),
+      Offset(140, 110),
     ];
+    _destinationOffsetList = _sourceOffsetList;
   }
   @override
   void dispose() {
     super.dispose();
   }
 
-  double width;
-  double heihgt;
-  List<Offset> offsetList;
+  double _radians;
+  double get radians => _radians;
+  set radians(double radians) {
+    _radians = radians;
+    _update();
+  }
+
+  double _tx;
+  double get tx => _tx;
+  set tx(double tx) {
+    _tx = tx;
+    _update();
+  }
+
+  double _ty;
+  double get ty => _ty;
+  set ty(double ty) {
+    _ty = ty;
+    _update();
+  }
+
+  List<Offset> _sourceOffsetList;
+  List<Offset> _destinationOffsetList;
+  List<Offset> get destinationOffsetList => _destinationOffsetList;
 
   /// アフィン変換は次のようになっている
   /// x' = x cosθ - y sinθ + tx
@@ -32,12 +54,10 @@ class CanvasController extends ChangeNotifier {
     return Offset(dx, dy);
   }
 
-  void rotate90ccw() {
-    final tmpWidth = width;
-    width = heihgt;
-    heihgt = tmpWidth;
-    offsetList = offsetList
-        .map((e) => _affinTranslate(e, radians: -pi / 2, ty: tmpWidth))
+  void _update() {
+    _destinationOffsetList = _sourceOffsetList
+        .map((_sourceOffsetList) => _affinTranslate(_sourceOffsetList,
+            radians: radians, tx: tx, ty: ty))
         .toList();
     notifyListeners();
   }

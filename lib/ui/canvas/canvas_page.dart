@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,23 +23,64 @@ class CanvasPage extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _provider.rotate90ccw();
-        },
-        child: const Icon(Icons.rotate_left_rounded),
-      ),
-      body: Center(
-        child: Container(
-          width: _provider.width,
-          height: _provider.heihgt,
-          decoration: BoxDecoration(
-            border: Border.all(),
+      body: Stack(
+        children: [
+          Center(
+            child: CustomPaint(
+              painter: Painter(offsetList: _provider.destinationOffsetList),
+            ),
           ),
-          child: CustomPaint(
-            painter: Painter(offsetList: _provider.offsetList),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              height: 200,
+              width: 300,
+              child: Slider(
+                value: _provider.radians,
+                onChanged: (radians) {
+                  _provider.radians = radians;
+                },
+                min: 0,
+                max: 4 * pi,
+              ),
+            ),
           ),
-        ),
+          Positioned(
+            right: 80,
+            bottom: 120,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 50,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'tx',
+                      hintText: '0',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (tx) {
+                      _provider.tx = double.parse(tx);
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16),
+                SizedBox(
+                  width: 50,
+                  child: TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'ty',
+                      hintText: '0',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (ty) {
+                      _provider.ty = double.parse(ty);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
