@@ -25,22 +25,20 @@ class CanvasController extends ChangeNotifier {
   /// アフィン変換は次のようになっている
   /// x' = x cosθ - y sinθ + tx
   /// y' = x sinθ + y cosθ + ty
-  /// -90 度回転では cos(-pi/2) = 0, sin(-pi/2) = -1 となる。つまり...
-  /// x' = x *  0 - y * 1 + tx =>  y + tx
-  /// y' = x * -1 - y * 0 + ty => -x + ty
-  /// canvas の原点の位置が回転によりずれるため、
-  /// y 軸方向に回転前の width だけ平行移動する
+  Offset _affinTranslate(Offset offset,
+      {double radians = 0, double tx = 0, double ty = 0}) {
+    final dx = offset.dx * cos(radians) - offset.dy * sin(radians) + tx;
+    final dy = offset.dx * sin(radians) + offset.dy * cos(radians) + ty;
+    return Offset(dx, dy);
+  }
+
   void rotate90ccw() {
     final tmpWidth = width;
     width = heihgt;
     heihgt = tmpWidth;
-    final tmpOffsetList = <Offset>[];
-    for (final offset in offsetList) {
-      final dx = offset.dy;
-      final dy = -offset.dx + tmpWidth;
-      tmpOffsetList.add(Offset(dx, dy));
-    }
-    offsetList = tmpOffsetList;
+    offsetList = offsetList
+        .map((e) => _affinTranslate(e, radians: -pi / 2, ty: tmpWidth))
+        .toList();
     notifyListeners();
   }
 }
