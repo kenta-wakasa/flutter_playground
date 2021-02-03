@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../entity/sample_data.dart';
+import '../canvas/canvas_page.dart';
 import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
@@ -59,6 +60,11 @@ class SampleListController extends ChangeNotifier {
         title: HttpTestPage.title,
         description: 'サーバーと通信してみたい',
         page: HttpTestPage(),
+      ),
+      const SampleData(
+        title: CanvasPage.title,
+        description: '座標の回転をやってみたい',
+        page: CanvasPage(),
       ),
     ];
   }

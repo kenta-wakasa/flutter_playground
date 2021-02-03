@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'template_controller.dart';
 
+final templateProvider = ChangeNotifierProvider.autoDispose<TemplateController>(
+  (ref) => TemplateController(),
+);
+
 class TemplatePage extends ConsumerWidget {
   const TemplatePage({Key key}) : super(key: key);
 
@@ -17,6 +21,9 @@ class TemplatePage extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
+      body: CustomPaint(
+        
+       painter: Painter(),
     );
   }
 }
