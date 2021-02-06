@@ -12,76 +12,83 @@ final canvasProvider = ChangeNotifierProvider.autoDispose<CanvasController>(
 
 class CanvasPage extends ConsumerWidget {
   const CanvasPage({Key key}) : super(key: key);
-  static const String title = 'Canvas';
+  static const String title = 'アフィン変換';
+  static const textStyle = TextStyle(fontSize: 24, fontWeight: FontWeight.bold);
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final _provider = watch(canvasProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          title,
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: Stack(
-        children: [
+        appBar: AppBar(
+            title: const Text(title,
+                style: TextStyle(fontWeight: FontWeight.bold))),
+        body: SafeArea(
+            child: Stack(children: [
           Center(
             child: CustomPaint(
-              painter: Painter(offsetList: _provider.destinationOffsetList),
-            ),
+                painter: Painter(offsetList: _provider.destinationOffsetList)),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 200,
-              width: 300,
-              child: Slider(
-                value: _provider.radians,
-                onChanged: (radians) {
-                  _provider.radians = radians;
-                },
-                min: 0,
-                max: 4 * pi,
-              ),
-            ),
-          ),
-          Positioned(
-            right: 80,
-            bottom: 120,
-            child: Row(
+          Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(
-                  width: 50,
+                    height: 80,
+                    width: 300,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Slider(
+                              onChanged: (value) => _provider.radians = value,
+                              value: _provider.radians,
+                              min: 0,
+                              max: 2 * pi),
+                          const Text('Rotation', style: textStyle)
+                        ])),
+                SizedBox(
+                    height: 80,
+                    width: 300,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Slider(
+                              value: _provider.scale,
+                              onChanged: (value) => _provider.scale = value,
+                              min: 1,
+                              max: 20),
+                          const Text('Scale', style: textStyle)
+                        ]))
+              ]),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                SizedBox(
+                  width: 160,
                   child: TextField(
+                    style: const TextStyle(fontSize: 36),
                     decoration: const InputDecoration(
-                      labelText: 'tx',
-                      hintText: '0',
-                      border: OutlineInputBorder(),
-                    ),
+                        labelText: 'tx',
+                        hintText: '0',
+                        border: OutlineInputBorder()),
                     onChanged: (tx) {
                       _provider.tx = double.parse(tx);
                     },
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 16, height: 500),
                 SizedBox(
-                  width: 50,
-                  child: TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'ty',
-                      hintText: '0',
-                      border: OutlineInputBorder(),
-                    ),
-                    onChanged: (ty) {
-                      _provider.ty = double.parse(ty);
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+                    width: 160,
+                    child: TextField(
+                        style: const TextStyle(fontSize: 36),
+                        decoration: const InputDecoration(
+                          labelText: 'ty',
+                          hintText: '0',
+                          border: OutlineInputBorder(),
+                        ),
+                        onChanged: (ty) {
+                          _provider.ty = double.parse(ty);
+                        }))
+              ]))
+        ])));
   }
 }

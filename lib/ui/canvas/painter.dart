@@ -6,8 +6,8 @@ class Painter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 1.0
+      ..color = Colors.orange
+      ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke;
     final path = Path()..addPolygon(offsetList, false);
     canvas.drawPath(path, paint);
