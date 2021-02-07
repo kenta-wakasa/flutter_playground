@@ -21,9 +21,6 @@ class TemplatePage extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: CustomPaint(
-        
-       painter: Painter(),
     );
   }
 }

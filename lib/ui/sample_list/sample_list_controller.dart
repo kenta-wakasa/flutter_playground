@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../entity/sample_data.dart';
+import '../animation/animation_page.dart';
 import '../canvas/canvas_page.dart';
 import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
@@ -65,6 +66,11 @@ class SampleListController extends ChangeNotifier {
         title: CanvasPage.title,
         description: '座標の回転をやってみたい',
         page: CanvasPage(),
+      ),
+      const SampleData(
+        title: AnimationPage.title,
+        description: 'アニメーションをやる',
+        page: AnimationPage(),
       ),
     ];
   }
