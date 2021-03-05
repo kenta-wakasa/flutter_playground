@@ -3,19 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../entity/sample_data.dart';
+import '../animated_list/animated_list_page.dart';
 import '../animation/animation_page.dart';
 import '../canvas/canvas_page.dart';
 import '../clear_button/clear_button_page.dart';
 import '../counter/counter_page.dart';
 import '../file_picker/file_picker_page.dart';
 import '../freezed/freezed_page.dart';
-import '../http_test/http_test_page.dart';
 import '../io/io_page.dart';
 import '../movable_box/movable_box_page.dart';
 import '../stopwatch/stopwatch_page.dart';
 
-final sampleListProvider =
-    ChangeNotifierProvider.autoDispose<SampleListController>(
+final sampleListProvider = ChangeNotifierProvider.autoDispose<SampleListController>(
   (ref) => SampleListController(),
 );
 
@@ -58,11 +57,6 @@ class SampleListController extends ChangeNotifier {
         page: MovableBoxPage(),
       ),
       const SampleData(
-        title: HttpTestPage.title,
-        description: 'サーバーと通信してみたい',
-        page: HttpTestPage(),
-      ),
-      const SampleData(
         title: CanvasPage.title,
         description: '座標の回転をやってみたい',
         page: CanvasPage(),
@@ -71,6 +65,11 @@ class SampleListController extends ChangeNotifier {
         title: AnimationPage.title,
         description: 'アニメーションをやる',
         page: AnimationPage(),
+      ),
+      SampleData(
+        title: AnimatedListPage.title,
+        description: 'アニメーションをやる',
+        page: AnimatedListPage(),
       ),
     ];
   }
