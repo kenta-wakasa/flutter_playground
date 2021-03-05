@@ -6,6 +6,7 @@ class AnimatedListPage extends ConsumerWidget {
   AnimatedListPage({Key key}) : super(key: key);
   static const String title = 'AnimatedList';
   final animationKey = GlobalKey<AnimatedListState>();
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final provider = watch(animatedListProvider);
@@ -19,7 +20,7 @@ class AnimatedListPage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           animationKey.currentState.insertItem(provider.itemList.length);
-          provider.addListItem();
+          provider.addItem();
         },
         child: const Icon(Icons.add_rounded),
       ),
@@ -27,20 +28,37 @@ class AnimatedListPage extends ConsumerWidget {
         key: animationKey,
         initialItemCount: provider.itemList.length,
         itemBuilder: (context, index, animation) {
-          return Padding(
-            padding: const EdgeInsets.all(2),
-            child: SizeTransition(
-              sizeFactor: animation,
-              axis: Axis.vertical,
-              child: SizedBox(
-                height: 100,
-                child: Card(
-                  color: provider.itemList[index],
-                  child: Container(),
+          final color = provider.itemList[index];
+          Widget _itemBuilder(
+            BuildContext context,
+            int index,
+            Animation<double> animation,
+          ) {
+            void _removeItem() {
+              animationKey.currentState.removeItem(
+                index,
+                (context, animation) => _itemBuilder(context, index, animation),
+              );
+              provider.removeAt(index);
+            }
+
+            return Padding(
+              padding: const EdgeInsets.all(2),
+              child: SizeTransition(
+                sizeFactor: animation,
+                axis: Axis.vertical,
+                child: InkWell(
+                  child: Card(
+                    color: color,
+                    child: Container(height: 100),
+                  ),
+                  onTap: _removeItem,
                 ),
               ),
-            ),
-          );
+            );
+          }
+
+          return _itemBuilder(context, index, animation);
         },
       ),
     );

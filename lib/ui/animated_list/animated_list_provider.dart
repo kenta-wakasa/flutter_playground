@@ -13,8 +13,13 @@ class AnimatedListProvider extends ChangeNotifier {
 
   List<Color> itemList = [];
 
-  void addListItem() {
+  void addItem() {
     itemList.add(randomColor);
+    notifyListeners();
+  }
+
+  void removeAt(int index) {
+    itemList.removeAt(index);
     notifyListeners();
   }
 
