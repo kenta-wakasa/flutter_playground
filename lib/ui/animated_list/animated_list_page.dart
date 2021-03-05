@@ -29,19 +29,11 @@ class AnimatedListPage extends ConsumerWidget {
         initialItemCount: provider.itemList.length,
         itemBuilder: (context, index, animation) {
           final color = provider.itemList[index];
+
           Widget _itemBuilder(
             BuildContext context,
-            int index,
             Animation<double> animation,
           ) {
-            void _removeItem() {
-              animationKey.currentState.removeItem(
-                index,
-                (context, animation) => _itemBuilder(context, index, animation),
-              );
-              provider.removeAt(index);
-            }
-
             return Padding(
               padding: const EdgeInsets.all(2),
               child: SizeTransition(
@@ -52,13 +44,16 @@ class AnimatedListPage extends ConsumerWidget {
                     color: color,
                     child: Container(height: 100),
                   ),
-                  onTap: _removeItem,
+                  onTap: () {
+                    animationKey.currentState.removeItem(index, _itemBuilder);
+                    provider.removeAt(index);
+                  },
                 ),
               ),
             );
           }
 
-          return _itemBuilder(context, index, animation);
+          return _itemBuilder(context, animation);
         },
       ),
     );
