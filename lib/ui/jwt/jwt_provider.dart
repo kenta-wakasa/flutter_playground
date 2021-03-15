@@ -17,7 +17,10 @@ class JwtProvider extends ChangeNotifier {
     final random = Random.secure();
 
     // key の生成方法はこれであっているのか。
-    final values = List<int>.generate(32, (i) => random.nextInt(255));
+    final values = List<int>.generate(
+      32,
+      (i) => random.nextInt(256), // from 0 up to 255 included
+    );
     final key = base64UrlEncode(values).split('=').first;
     print(key);
     // final sampleKey = 'iFWK6fWdcTlgnzuFn0g04CWUsRaq71gGhRM8wTRzyDj';
