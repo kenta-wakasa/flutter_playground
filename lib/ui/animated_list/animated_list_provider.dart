@@ -25,7 +25,7 @@ class AnimatedListProvider extends ChangeNotifier {
 
   Color get randomColor {
     return Color.fromARGB(
-      _random.nextInt(256),
+      255,
       _random.nextInt(256),
       _random.nextInt(256),
       _random.nextInt(256),

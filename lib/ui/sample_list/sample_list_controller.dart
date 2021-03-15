@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_playground/ui/jwt/jwt_page.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -70,6 +71,11 @@ class SampleListController extends ChangeNotifier {
         title: AnimatedListPage.title,
         description: 'アニメーションをやる',
         page: AnimatedListPage(),
+      ),
+      const SampleData(
+        title: JwtPage.title,
+        description: 'JWT',
+        page: JwtPage(),
       ),
     ];
   }
